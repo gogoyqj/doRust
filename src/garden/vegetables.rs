@@ -5,10 +5,9 @@ use std::collections::HashMap;
 use std::env;
 use std::path::PathBuf;
 
-pub fn vegetables() {
+pub fn vegetables(pid: u8) {
     let pwd = env::current_dir().unwrap();
     let asset_dir = PathBuf::from(pwd).join("assets");
-    println!("{}", asset_dir.display());
     let img = image::open(PathBuf::from(&asset_dir).join("yqj.png")).expect("image not found");
 
     let mut color_map = HashMap::new();
@@ -30,24 +29,6 @@ pub fn vegetables() {
         }
     }
 
-    // match max_color {
-    //     Some(color) => {
-    //         println!(
-    //             "max_color: {:?} count: {:?}",
-    //             color,
-    //             match color_map.get(&color) {
-    //                 Some(count) => {
-    //                     count
-    //                 }
-    //                 _ => {
-    //                     &1
-    //                 }
-    //             }
-    //         )
-    //     }
-    //     None => println!("No max color found"),
-    // }
-
     assert!(max_color.is_some(), "empty image");
     let m_color = max_color.unwrap();
     let count = color_map.get(&m_color).unwrap();
@@ -61,11 +42,12 @@ pub fn vegetables() {
             _x,
             _y,
             // Rgba([255 - _r, 255 - _g, 0, a]),
-            Rgba([_r, 0, _b, a]),
+            Rgba([0, _g, _b, a]),
+            // Rgba([_r, 0, _b, a]),
             // Rgba([_r, _g, 0, a]),
         );
     }
     new_image
-        .save(PathBuf::from(&asset_dir).join("output-yqj.png"))
+        .save(PathBuf::from(&asset_dir).join(format!("output-{pid}yqj.png")))
         .expect("save image faild");
 }

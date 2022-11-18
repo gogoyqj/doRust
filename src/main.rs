@@ -1,7 +1,18 @@
 use crate::garden::vegetables::vegetables;
+use std::thread;
 
 pub mod garden;
 
 fn main() {
-    vegetables();
+    let mut handles = vec![];
+
+    for i in 1..5 {
+        let handle = thread::spawn(move || {
+            vegetables(i);
+        });
+        handles.push(handle);
+    }
+    for handle in handles {
+        handle.join().unwrap();
+    }
 }
