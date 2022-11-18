@@ -47,8 +47,15 @@ pub fn vegetables(pid: u8) {
                 Rgba([0, _g, _b, a])
             } else if pid == 3 {
                 Rgba([_r, 0, _b, a])
-            } else {
+            } else if pid == 4 {
                 Rgba([_r, _g, 0, a])
+            } else {
+                Rgba([
+                    ((_r as f64) * 0.3 as f64).round() as u8,
+                    ((_g as f64) * 0.59 as f64).round() as u8,
+                    ((_b as f64) * 0.11 as f64).round() as u8,
+                    a,
+                ])
             },
         );
     }

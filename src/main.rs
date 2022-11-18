@@ -6,7 +6,7 @@ pub mod garden;
 fn main() {
     let mut handles = vec![];
 
-    for i in 1..5 {
+    for i in 1..6 {
         let handle = thread::spawn(move || {
             vegetables(i);
         });
