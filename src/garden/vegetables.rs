@@ -41,10 +41,15 @@ pub fn vegetables(pid: u8) {
         new_image.put_pixel(
             _x,
             _y,
-            // Rgba([255 - _r, 255 - _g, 0, a]),
-            Rgba([0, _g, _b, a]),
-            // Rgba([_r, 0, _b, a]),
-            // Rgba([_r, _g, 0, a]),
+            if pid == 1 {
+                Rgba([255 - _r, 255 - _g, 0, a])
+            } else if pid == 2 {
+                Rgba([0, _g, _b, a])
+            } else if pid == 3 {
+                Rgba([_r, 0, _b, a])
+            } else {
+                Rgba([_r, _g, 0, a])
+            },
         );
     }
     new_image
